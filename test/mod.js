@@ -2,7 +2,7 @@ require('chai').use(require('chai-as-promised')).should()
 const { join } = require('path')
 const faker = require('faker')
 
-const { create, read, update, list, destroy, destroyTable } = require('../index.js')
+const { create, read, update, list, destroy, destroyTable } = require('../mod.js')
 const baseDir = join(__dirname, '.data')
 
 describe('create', () => {
