@@ -1,6 +1,6 @@
-const { open, unlink, ftruncate, readdir, readFile, stat, writeFile, close, mkdir, rmdir } = require('fs')
-const { join } = require('path')
-const { promisify } = require('util')
+import { open, unlink, ftruncate, readdir, readFile, stat, writeFile, close, mkdir, rmdir } from './deps.ts'
+import { join } from './deps.ts'
+// const { promisify } = require('util')
 
 const closeFile = (descriptor, done) => {
   close(descriptor, (err) => {
@@ -44,7 +44,7 @@ const createTable = (dir, done) => {
   })
 }
 
-const _create = (baseDir, dir, file, data, done) => {
+export const create = async (baseDir, dir, file, data, done) => {
   const dataDir = join(baseDir, dir)
   const fileName = join(dataDir, `${file}.json`)
   createTable(dataDir, (err) => {
@@ -63,7 +63,7 @@ const _create = (baseDir, dir, file, data, done) => {
   })
 }
 
-const _read = (baseDir, dir, file, done) => {
+export const read = async (baseDir, dir, file, done) => {
   const filePath = join(baseDir, dir, `${file}.json`)
   stat(filePath, (err, _) => {
     if (!err) {
@@ -86,7 +86,7 @@ const _read = (baseDir, dir, file, done) => {
   })
 }
 
-const _update = (baseDir, dir, file, data, done) => {
+export const update = async (baseDir, dir, file, data, done) => {
   open(join(baseDir, dir, `${file}.json`), 'r+', (err, fileDescriptor) => {
     if (!err && fileDescriptor) {
       const dataString = typeof data === 'string' ? data : JSON.stringify(data)
@@ -103,7 +103,7 @@ const _update = (baseDir, dir, file, data, done) => {
   })
 }
 
-const _destroy = (baseDir, dir, file, done) => {
+export const destroy = async (baseDir, dir, file, done) => {
   const filepath = join(baseDir, dir, `${file}.json`)
   stat(filepath, (err, _) => {
     if (!err) {
@@ -120,7 +120,7 @@ const _destroy = (baseDir, dir, file, done) => {
   })
 }
 
-const _list = (baseDir, dir, done) => {
+export const list = async (baseDir, dir, done) => {
   const filePath = join(baseDir, dir)
   stat(filePath, (err, r) => {
     if (err === null) {
@@ -143,7 +143,7 @@ const _list = (baseDir, dir, done) => {
   })
 }
 
-const _deleteTable = (baseDir, dir, done) => {
+export const destroyTable = async (baseDir, dir, done) => {
   const path = join(baseDir, dir)
   _list(baseDir, dir, (err, toDelete) => {
     if (!err && toDelete) {
@@ -185,9 +185,9 @@ const _deleteTable = (baseDir, dir, done) => {
   })
 }
 
-module.exports.create = promisify(_create)
-module.exports.read = promisify(_read)
-module.exports.destroy = promisify(_destroy)
-module.exports.list = promisify(_list)
-module.exports.update = promisify(_update)
-module.exports.destroyTable = promisify(_deleteTable)
+// module.exports.create = promisify(_create)
+// module.exports.read = promisify(_read)
+// module.exports.destroy = promisify(_destroy)
+// module.exports.list = promisify(_list)
+// module.exports.update = promisify(_update)
+// module.exports.destroyTable = promisify(_deleteTable)

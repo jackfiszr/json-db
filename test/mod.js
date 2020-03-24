@@ -1,8 +1,8 @@
-require('chai').use(require('chai-as-promised')).should()
-const { join } = require('path')
-const faker = require('faker')
+// require('chai').use(require('chai-as-promised')).should()
+import { join } from '../deps.ts'
+import { faker } from './test_deps.ts'
 
-const { create, read, update, list, destroy, destroyTable } = require('../mod.js')
+import { create, read, update, list, destroy, destroyTable } from '../mod.js'
 const baseDir = join(__dirname, '.data')
 
 describe('create', () => {
