@@ -1,12 +1,14 @@
 // require('chai').use(require('chai-as-promised')).should()
 import { join } from '../deps.ts'
-import { faker } from './test_deps.ts'
+import { __dirname, faker, test, assertEquals } from './test_deps.ts'
 
 import { create, read, update, list, destroy, destroyTable } from '../mod.js'
-const baseDir = join(__dirname, '.data')
 
-describe('create', () => {
-  it('can create items', async () => {
+const baseDir = join(__dirname, '.data')
+console.log(baseDir)
+test({
+  name: 'create() can create items',
+  fn: async () => {
     let errors = 0
     for (let t = 0; t < 10; t++) {
       for (let i = 0; i < 10; i++) {
@@ -23,13 +25,13 @@ describe('create', () => {
           console.error(e)
           errors++
         })
-        errors.should.be.equal(0)
+        assertEquals(errors, 0)
       }
     }
-  })
+  }
 })
-
-describe('read', () => {
+/*
+test('read', () => {
   it('can read items', async () => {
     let errors = 0
     for (let t = 0; t < 10; t++) {
@@ -48,7 +50,7 @@ describe('read', () => {
   })
 })
 
-describe('update', () => {
+test('update', () => {
   it('can update item', async () => {
     let errors = 0
     let data = await read(baseDir, '5', '6').catch((e) => {
@@ -71,7 +73,7 @@ describe('update', () => {
   })
 })
 
-describe('delete', () => {
+test('delete', () => {
   it('can delete item', async () => {
     let errors = 0
     let msg = ''
@@ -86,7 +88,7 @@ describe('delete', () => {
   })
 })
 
-describe('list', () => {
+test('list', () => {
   it('can list items', async () => {
     let errors = 0
     const lst = await list(baseDir, '9').catch((e) =>  {
@@ -98,7 +100,7 @@ describe('list', () => {
   })
 })
 
-describe('delete table', () => {
+test('delete table', () => {
   it('can delete table', async () => {
     let errors = 0
     for (let i = 0; i < 10; i++) {
@@ -111,3 +113,5 @@ describe('delete table', () => {
     }
   })
 })
+*/
+Deno.runTests()
