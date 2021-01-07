@@ -1,4 +1,4 @@
-import { open, unlink, ftruncate, readdir, readFile, stat, writeFile, close, mkdir, rmdir } from './deps.ts'
+import { open, unlink, ftruncate, readDir, readFile, stat, writeFile, close, mkdir, rmdir } from './deps.ts'
 import { join } from './deps.ts'
 // const { promisify } = require('util')
 
@@ -124,7 +124,7 @@ export const list = async (baseDir, dir, done) => {
   const filePath = join(baseDir, dir)
   stat(filePath, (err, r) => {
     if (err === null) {
-      readdir(filePath, (err, data) => {
+      readDir(filePath, (err, data) => {
         if (!err && data && data.length > 0) {
           const out = []
           data.forEach((filename) => {

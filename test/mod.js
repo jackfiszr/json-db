@@ -5,7 +5,7 @@ import { __dirname, faker, test, assertEquals } from './test_deps.ts'
 import { create, read, update, list, destroy, destroyTable } from '../mod.js'
 
 const baseDir = join(__dirname, '.data')
-console.log(baseDir)
+
 test({
   name: 'create() can create items',
   fn: async () => {
@@ -114,4 +114,3 @@ test('delete table', () => {
   })
 })
 */
-Deno.runTests()

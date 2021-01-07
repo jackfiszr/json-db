@@ -1,10 +1,10 @@
-const { open, remove, truncate, readdir, readFile, stat, writeFile, close, mkdir } = Deno
-export { join } from 'https://deno.land/std@v0.38.0/path/mod.ts'
+const { open, remove, truncate, readDir, readFile, stat, writeFile, close, mkdir } = Deno
+export { join } from 'https://deno.land/std@0.83.0/path/mod.ts'
 export {
   open,
   remove as unlink,
   truncate as ftruncate,
-  readdir,
+  readDir,
   readFile,
   stat,
   writeFile,
